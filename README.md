@@ -110,36 +110,5 @@ and you have to do that every time you want to use a mutex (destroy it after you
 
 Here is another visualization with the locks:
 
-Thread #1             Thread #2              Bank Balance
+ <img width="687" alt="Screen Shot 2024-08-15 at 10 27 45 AM" src="https://github.com/user-attachments/assets/59f56a08-ecc3-43b2-b52d-6586c58b30a6">
 
-                       **  LOCK  **
-
-  WAIT @ LOCK      Read Balance  <------------- 0
-      |
-      |                balance = 0
-      |
-      |                Deposit +200
-      |
-      |                balance  = 200
-      |
-      |                Write Balance  ------------> 200
-      |
-      |                balance = 200
-      |
-  LOCK FREE            ** UNLOCK **
-
-  **  LOCK  **
-
-  Read Balance    <----------------------------------- 200
-  
-  balance = 0
-
-  Deposit +300
-  
-  balance = 500
-
-  Write Balance  ----------------------------------> 500
-  
-  balance = 500
-
-  ** UNLOCK **
