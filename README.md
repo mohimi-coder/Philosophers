@@ -39,7 +39,10 @@ To achieve this, we will be using threads to implement a multithreading solution
 In order to understand the solution you’ll needs to understand the concept of threads first, here are some good videos I recommend you watch:
 
 General introduction to threads:
+
 🚀 https://shor.tf/threads
+
 Introduction to threads with code examples :
+
 🚀 https://shor.tf/intru_thread
 
