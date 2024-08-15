@@ -169,5 +169,9 @@ and if they did we will again change the dead flag to one and break the threads 
 The last step is to Destroy all the mutexes you initialized, otherwise, they won’t work.
 In this step, we will free all the data we allocated if we chose to allocate it(we didn’t).
 
+# if you intersting to do bounus part you can read about Semaphores here:
+
+🚀 https://shor.tf/semaphors
+
 ######## that's all 😀
 
