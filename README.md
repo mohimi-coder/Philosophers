@@ -64,7 +64,8 @@ However, due to race conditions, this might not be the case.
 
 # this is the simple exemple:
 
-Thread #1             Thread #2              Bank Balance
+Thread #1               Thread #2                Bank Balance
+
 
 Read Balance  <----------------------------------- 0
 
@@ -113,7 +114,7 @@ Thread #1             Thread #2              Bank Balance
 
                        **  LOCK  **
 
-  WAIT @ LOCK          Read Balance  <------------- 0
+  WAIT @ LOCK      Read Balance  <------------- 0
       |
       |                balance = 0
       |
@@ -129,7 +130,7 @@ Thread #1             Thread #2              Bank Balance
 
   **  LOCK  **
 
-  Read Balance  <----------------------------------- 200
+  Read Balance    <----------------------------------- 200
   
   balance = 0
 
