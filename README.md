@@ -90,3 +90,77 @@ Here is another visualization with the locks:
 
  <img width="687" alt="Screen Shot 2024-08-15 at 10 27 45 AM" src="https://github.com/user-attachments/assets/59f56a08-ecc3-43b2-b52d-6586c58b30a6">
 
+ you can read about Mutex here:
+
+🚀 https://shor.tf/mutex
+
+# First Step: Checking Valid Input
+
+The first thing we need to do before we even start initializing anything is to check the program input. 
+The program will receive 4 or 5 arguments so the first thing should be to throw an error if we receive more or less. 
+Let’s analyze the input we will receive: 5 800 200 200 7
+
+5   — The number of philosophers
+800 — The time a philosopher will die if he doesn’t eat
+200 — The time it takes a philosopher to eat
+200 — The time it takes a philosopher to sleep
+7   — Number of times all the philosophers need to eat before terminating the program **
+** optional argument
+
+Basically, all we need to do is to check that the input contains only numbers, 
+they should all be bigger than 0 except the number of meals each philo needs to eat (edge case). 
+In the evaluation form, it says we should not test with more than 200 philos so you can set the limit not to be more than 200.
+
+# Second Step: Structures
+
+In order for you to understand the way I approached and solved this project I’ll share with you the structures I made. 
+Because each philosopher needs to be a thread and all the data needs to pass to the routine functions, 
+structures are the best option. I created 2 structures, The program structure which holds all of the philosophers (in an array), 
+3 mutex, and one dead_flag, and the philo structure where we have all of the general data, 
+3 mutex pointers that point to the mutex in the program structure, 2 mutex pointers for the forks,
+and on dead pointer which points to the dead flag in the program structure.
+
+<img width="322" alt="Screen Shot 2024-08-15 at 11 02 46 AM" src="https://github.com/user-attachments/assets/690bafa9-827c-42c1-8651-c10c28902920">
+
+# Third Step: Initialization
+
+Because we know the maximum amount of philosophers our program can be tested with (200) and I wanted to avoid dealing with leaks, 
+freeing, and allocating, and mainly because I wanted the performance to be faster
+I decided to keep all the memory on the stack and not on the heap by initializing a philo structure array, 
+a mutex array for the forks and the program structure all in the main. From there I initialize the program variables,
+initialize all the mutexes for the mutex fork array, and lastly the philosophers — input variables and point the pointers to all the mutexes and the dead_flag.
+
+# Fourth Step: Thread Creation, Philo Routine, And Monitor
+
+Now we need to create the threads and join them. We will create as many threads as philosophers we have, 
+each philo needs to be a thread and we will create an extra thread (I called it observer) which will monitor everything.
+Each philo thread will run the philo routine function and the observer will run the monitor function.
+
+# Philo Routine()
+
+The routine will be the function executed over and over by the philos, Basically ,I created a loop that will break as soon as the dead flag is 1, 
+in other words as soon as a philo is dead. Remember:
+
+The philosophers alternatively eat, sleep, or think. While they are eating, they are not thinking nor sleeping, while thinking, 
+they are not eating nor sleeping, and, of course, while sleeping, they are not eating nor thinking.
+
+So in our loop, they will eat, sleep and think. Let’s start with the easiest one when they think we just need to print a message “X is thinking” (X is the philo number),
+When they sleep we need to make them sleep the length of the input inserted by the user using our ft_usleep (described in the bottom of this page) and then print the message “X is sleeping”. 
+Now to the eating part, We will lock the right fork first using pthread_mutex_lock and print the message, 
+and do the same with the left fork. Then he will eat using ft_usleep again and only then he will drop the forks by unlocking the locks,
+before that we change some variables that give our monitor indications but that’s the general idea.
+
+# Monitor()
+
+This thread will be running and monitoring the whole program, it has 2 checks in it that run infinitely until a philo dies or they all ate the number of meals they need to (last input argument). Basically, we will check that the time a philo needs to die didn’t surpass the last meal he had and that he is not concurrently eating. 
+If he indeed died we change the dead flag to 1 and that will break the loop in all of the threads. 
+The other check is to see if all the philos finished eating the amount of meals they need to,
+and if they did we will again change the dead flag to one and break the threads loop.
+
+# Fifth Step: Destroying All The Mutexes
+
+The last step is to Destroy all the mutexes you initialized, otherwise, they won’t work.
+In this step, we will free all the data we allocated if we chose to allocate it(we didn’t).
+
+######## that's all 😀
+
