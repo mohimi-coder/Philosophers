@@ -25,7 +25,9 @@ At this point we know that a philosopher can do three things: eat, sleep, or thi
 but in order to eat he has to pick two forks (the one in front of him and another one to his right or to his left,
 in my solution he picks the one to his right, both work — different implementation). Let’s use a picture to have a more concrete idea of what we are talking about:
 
+
 ![philo](https://github.com/user-attachments/assets/503686b3-f6ae-4851-8a7d-9feab20cee39)
+
 
 Imagine there are five philosophers sitting at a table. When Philosopher 1 wants to eat,
 they pick up the fork in front of them and the one to their right (which is also in front of Philosopher 5).
@@ -64,6 +66,7 @@ However, due to race conditions, this might not be the case.
 
 # this is the simple exemple:
 
+
 <img width="682" alt="Screen Shot 2024-08-15 at 10 30 22 AM" src="https://github.com/user-attachments/assets/9a5c62e6-9fd7-442b-82af-8ab6b8702193">
 
 
@@ -88,7 +91,9 @@ and you have to do that every time you want to use a mutex (destroy it after you
 
 Here is another visualization with the locks:
 
+
  <img width="687" alt="Screen Shot 2024-08-15 at 10 27 45 AM" src="https://github.com/user-attachments/assets/59f56a08-ecc3-43b2-b52d-6586c58b30a6">
+ 
 
  you can read about Mutex here:
 
@@ -120,7 +125,9 @@ structures are the best option. I created 2 structures, The program structure wh
 3 mutex pointers that point to the mutex in the program structure, 2 mutex pointers for the forks,
 and on dead pointer which points to the dead flag in the program structure.
 
+
 <img width="322" alt="Screen Shot 2024-08-15 at 11 02 46 AM" src="https://github.com/user-attachments/assets/690bafa9-827c-42c1-8651-c10c28902920">
+
 
 # Third Step: Initialization
 
