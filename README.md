@@ -24,6 +24,7 @@ Let me start by explaining the general idea. First of all, we have to imagine a 
 At this point we know that a philosopher can do three things: eat, sleep, or think, 
 but in order to eat he has to pick two forks (the one in front of him and another one to his right or to his left,
 in my solution he picks the one to his right, both work — different implementation). Let’s use a picture to have a more concrete idea of what we are talking about:
+
 ![philo](https://github.com/user-attachments/assets/503686b3-f6ae-4851-8a7d-9feab20cee39)
 
 Imagine there are five philosophers sitting at a table. When Philosopher 1 wants to eat,
@@ -46,3 +47,36 @@ Introduction to threads with code examples :
 
 🚀 https://shor.tf/intru_thread
 
+# Data Races (Race Conditions) — What Are They?
+
+Data races are a common problem in multithreaded programming. Data races occur when multiple tasks or threads access a shared resource without sufficient protections, leading to undefined or unpredictable behavior.
+
+➥ two or more threads concurrently accessing a location of memory
+➥ one of them is a write
+➥ one of them is unsynchronized
+
+In simple terms, a race condition occurs when two or more threads attempt to access and modify the same variable simultaneously. 
+This can lead to an incorrect final value of the variable, though it doesn't necessarily happen every time.
+
+For example, consider a function that deposits a specified amount into your bank account.
+If we use multithreading, with one thread depositing $300 and another thread depositing $200, you might expect the total balance to be $500. 
+However, due to race conditions, this might not be the case.
+
+# this is the simple exemple:
+
+Thread #1             Thread #2              Bank Balance
+
+Read Balance  <----------------------------------- 0
+balance = 0
+                      Read Balance  <------------- 0
+                      balance = 0
+
+Deposit +300
+balance = 300
+                      Deposit +200
+                      balance = 200
+
+Write Balance  ----------------------------------> 300
+balance = 300
+                      Write Balance  ------------> 200
+                      balance = 200
