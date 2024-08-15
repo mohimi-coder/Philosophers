@@ -67,16 +67,22 @@ However, due to race conditions, this might not be the case.
 Thread #1             Thread #2              Bank Balance
 
 Read Balance  <----------------------------------- 0
+
 balance = 0
                       Read Balance  <------------- 0
+                      
                       balance = 0
 
 Deposit +300
+
 balance = 300
                       Deposit +200
+                      
                       balance = 200
 
 Write Balance  ----------------------------------> 300
+
 balance = 300
                       Write Balance  ------------> 200
+                      
                       balance = 200
