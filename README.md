@@ -114,12 +114,15 @@ Thread #1             Thread #2              Bank Balance
                        **  LOCK  **
 
   WAIT @ LOCK          Read Balance  <------------- 0
+      |
       |                balance = 0
       |
       |                Deposit +200
+      |
       |                balance  = 200
       |
       |                Write Balance  ------------> 200
+      |
       |                balance = 200
       |
   LOCK FREE            ** UNLOCK **
@@ -127,12 +130,15 @@ Thread #1             Thread #2              Bank Balance
   **  LOCK  **
 
   Read Balance  <----------------------------------- 200
+  
   balance = 0
 
   Deposit +300
+  
   balance = 500
 
   Write Balance  ----------------------------------> 500
+  
   balance = 500
 
   ** UNLOCK **
