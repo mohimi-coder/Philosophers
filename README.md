@@ -64,29 +64,7 @@ However, due to race conditions, this might not be the case.
 
 # this is the simple exemple:
 
-Thread #1               Thread #2                Bank Balance
-
-
-Read Balance  <----------------------------------- 0
-
-balance = 0
-                      Read Balance  <------------- 0
-                      
-                      balance = 0
-
-Deposit +300
-
-balance = 300
-                      Deposit +200
-                      
-                      balance = 200
-
-Write Balance  ----------------------------------> 300
-
-balance = 300
-                      Write Balance  ------------> 200
-                      
-                      balance = 200
+<img width="682" alt="Screen Shot 2024-08-15 at 10 30 22 AM" src="https://github.com/user-attachments/assets/9a5c62e6-9fd7-442b-82af-8ab6b8702193">
 
 
 
