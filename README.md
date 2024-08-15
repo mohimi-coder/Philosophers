@@ -86,3 +86,53 @@ balance = 300
                       Write Balance  ------------> 200
                       
                       balance = 200
+
+
+
+When the two deposit functions run at the same time, they both read the balance which is 0, 
+they both deposit the amount inserted and change the balance variable locally, but when they write it to the variable itself, they overwrite each other. 
+thread #1 writes 300 first but thread #2 writes as well and changes the variable to 200. 
+How can we solve this? easily we just need to attach a lock, let me introduce you to mutex.
+
+
+# Mutex
+
+Now that we understand what a race condition is, let's explore the solution. 
+Imagine a lock that safeguards a block of code, allowing only the lock's owner to execute it until the lock is released.
+
+Using the previous example, we can prevent overwriting by adding a lock to the deposit function. 
+If thread #1 acquires the lock, thread #2 must wait until thread #1 has finished executing the code and releases the lock.
+Only then can thread #2 enter and execute its own operations.
+
+You have surely noticed that we initialize and destroy the mutex, 
+and you have to do that every time you want to use a mutex (destroy it after you finished using it) otherwise it won’t work.
+
+Here is another visualization with the locks:
+
+Thread #1             Thread #2              Bank Balance
+
+                       **  LOCK  **
+
+  WAIT @ LOCK          Read Balance  <------------- 0
+      |                balance = 0
+      |
+      |                Deposit +200
+      |                balance  = 200
+      |
+      |                Write Balance  ------------> 200
+      |                balance = 200
+      |
+  LOCK FREE            ** UNLOCK **
+
+  **  LOCK  **
+
+  Read Balance  <----------------------------------- 200
+  balance = 0
+
+  Deposit +300
+  balance = 500
+
+  Write Balance  ----------------------------------> 500
+  balance = 500
+
+  ** UNLOCK **
