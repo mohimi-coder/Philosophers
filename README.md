@@ -56,7 +56,9 @@ Introduction to threads with code examples :
 Data races are a common problem in multithreaded programming. Data races occur when multiple tasks or threads access a shared resource without sufficient protections, leading to undefined or unpredictable behavior.
 
 ➥ two or more threads concurrently accessing a location of memory
+
 ➥ one of them is a write
+
 ➥ one of them is unsynchronized
 
 In simple terms, a race condition occurs when two or more threads attempt to access and modify the same variable simultaneously. 
