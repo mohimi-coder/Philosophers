@@ -1,6 +1,13 @@
 🍉𓂆فلسطين🇵🇸🕊️
 
-# Philosophers
+
+<h1 align="center">ft_libft - 42 _ 1337 </h1>
+<p align="center">
+  <a href="https://github.com//mohimi-coder/Philosophers">
+    <img src="https://raw.githubusercontent.com/mohimi-coder/1337_badges/refs/heads/master/philosopherse.png" alt="42 Badge">
+  </a>
+</p>
+
 
 In this project, you will learn the basics of threading a process.
 You will see how to create threads and you will discover mutexes
