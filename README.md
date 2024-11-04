@@ -1,10 +1,10 @@
 🍉𓂆فلسطين🇵🇸🕊️
 
 
-<h1 align="center">Philosophers- 42 _ 1337 </h1>
+<h1 align="center">Philosophers_42_1337 </h1>
 <p align="center">
   <a href="https://github.com//mohimi-coder/Philosophers">
-    <img src="https://raw.githubusercontent.com/mohimi-coder/1337_badges/refs/heads/master/philosopherse.png" alt="42 Badge">
+    <img src="https://raw.githubusercontent.com/mohimi-coder/1337_badges/refs/heads/master/philosophersm.png" alt="42 Badge">
   </a>
 </p>
 
